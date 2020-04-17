@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Button, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import ReactMapboxGl from 'react-mapbox-gl';
+import ReactMapboxGl, {
+  GeoJSONLayer
+} from 'react-mapbox-gl';
 import PopupHolder from './components/PopupHolder';
 import {
   setMapCenter,
@@ -64,6 +66,7 @@ const MapHolder = ({
 }) => {
   const classes = useStyles({ visible });
   const [map, setLocalMap] = useState(null);
+  const [geoJSON, setGeoJSON] = useState({});
   const tooltipMessage = visible
     ? 'Приховати меню'
     : 'Показати меню';
@@ -72,8 +75,27 @@ const MapHolder = ({
       hidePopup();
     }
   };
+
   useEffect(() => {
     document.addEventListener('click', handlePopupClose);
+    fetch(
+      'https://api.mapbox.com/directions/v5/mapbox/driving/24.0315921,49.841952;24.055046172576798,49.83831206813981?access_token=pk.eyJ1Ijoib3Nrb3ZiYXNpdWsiLCJhIjoiY2s1NWVwcnhhMDhrazNmcGNvZjJ1MnA4OSJ9.56GsGp2cl6zpYh-Ns8ThxA&geometries=geojson'
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setGeoJSON({
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: data.routes[0].geometry
+            }
+          ]
+        });
+      });
+      
     return () => {
       document.removeEventListener(
         'click',
@@ -82,6 +104,12 @@ const MapHolder = ({
     };
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(geoJSON).length !== 0) {
+      console.log(geoJSON);
+    }
+  }, [geoJSON]);
 
   const loadMap = mapRaw => {
     if (mapRaw) {
@@ -121,6 +149,7 @@ const MapHolder = ({
       const { lng, lat } = newPoint;
       setMapCenter({ lng, lat });
     }
+
     // eslint-disable-next-line
   }, [newPoint]);
 
@@ -136,7 +165,11 @@ const MapHolder = ({
       event.preventDefault();
     }
   };
-
+     
+  const linePaint = {
+    'line-color': '#BF93E4',
+    'line-width': 5
+  };
   return (
     <div className={classes.mapContainer}>
       <Button
@@ -170,6 +203,10 @@ const MapHolder = ({
           <AddedPin coordinates={newPoint} />
         )}
         <PopupHolder />
+        <GeoJSONLayer
+          data={geoJSON}
+          linePaint={linePaint}
+        />
       </Map>
     </div>
   );

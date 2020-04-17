@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import geoJsonData from '../geoJsonData';
 import { setActive } from '../../Sidebar/components/ItemList/actions/list';
 import { showPopup } from '../actions/popupDisplay';
-import mapPin from '../../../icons/map-pin-icon.jpg';
+import mapPin from '../../../icons/map-marker-point.svg';
 
 const useStyles = makeStyles(() => ({
   clusterMarker: {
