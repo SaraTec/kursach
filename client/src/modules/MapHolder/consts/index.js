@@ -4,6 +4,7 @@ export const SHOW_POPUP = 'SHOW_POPUP';
 export const HIDE_POPUP = 'HIDE_POPUP';
 export const ADD_IMAGES = 'ADD_IMAGES';
 export const ADD_NEW_POINT = 'ADD_NEW_POINT';
+export const SELECT_DEFF = 'SELECT_DEF';
 export const popupOffsets = {
   bottom: [0, -30],
   left: [0, -30],

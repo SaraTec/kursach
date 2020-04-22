@@ -1,7 +1,8 @@
 import {
   ADD_NEW_POINT,
   SET_MAP_CENTER,
-  SET_MAP_ZOOM
+  SET_MAP_ZOOM,
+  SELECT_DEFF
 } from '../consts';
 
 export const setMapCenter = mapState => {
@@ -22,5 +23,12 @@ export const addNewPoint = newPoint => {
   return {
     type: ADD_NEW_POINT,
     payload: newPoint
+  };
+};
+
+export const selectDeff = deff => {
+  return {
+    type: SELECT_DEFF,
+    payload: deff
   };
 };

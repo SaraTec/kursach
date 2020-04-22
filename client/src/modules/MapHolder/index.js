@@ -1,5 +1,7 @@
-import React, { useState, useEffect} from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { geolocated } from 'react-geolocated';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Button, Tooltip } from '@material-ui/core';
@@ -11,11 +13,13 @@ import PopupHolder from './components/PopupHolder';
 import {
   setMapCenter,
   setMapZoom,
-  addNewPoint
+  addNewPoint,
+  selectDeff
 } from './actions/mapState';
 import { hidePopup } from './actions/popupDisplay';
 import DefibrillatorPinLayer from './layers/DefibrillatorPinLayer';
 import AddedPin from './layers/AddedPin';
+import UserPin from './layers/UserPin';
 import { sidebarWidth } from '../Sidebar/styleConstants';
 
 const useStyles = makeStyles(() => ({
@@ -58,11 +62,13 @@ const Map = ReactMapboxGl({
 const MapHolder = ({
   mapState,
   newPoint,
+  selectedDeff,
   setMapCenter,
   addNewPoint,
   hidePopup,
   setVisible,
-  visible
+  visible,
+  coords
 }) => {
   const classes = useStyles({ visible });
   const [map, setLocalMap] = useState(null);
@@ -78,24 +84,6 @@ const MapHolder = ({
 
   useEffect(() => {
     document.addEventListener('click', handlePopupClose);
-    fetch(
-      'https://api.mapbox.com/directions/v5/mapbox/driving/24.0315921,49.841952;24.055046172576798,49.83831206813981?access_token=pk.eyJ1Ijoib3Nrb3ZiYXNpdWsiLCJhIjoiY2s1NWVwcnhhMDhrazNmcGNvZjJ1MnA4OSJ9.56GsGp2cl6zpYh-Ns8ThxA&geometries=geojson'
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setGeoJSON({
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              geometry: data.routes[0].geometry
-            }
-          ]
-        });
-      });
-      
     return () => {
       document.removeEventListener(
         'click',
@@ -105,11 +93,41 @@ const MapHolder = ({
     // eslint-disable-next-line
   }, []);
 
+  /*  useEffect(()=>{
+    if(coords)
+    setMapCenter({ lng:coords.longitude, lat:coords.latitude })
+  },[coords]) */
+
   useEffect(() => {
-    if (Object.keys(geoJSON).length !== 0) {
-      console.log(geoJSON);
+    if (coords && Object.keys(selectedDeff).length !== 0) {
+      document.addEventListener('click', handlePopupClose);
+      const { longitude, latitude } = coords;
+      const { lng, lat } = selectedDeff;
+      fetch(
+        `https://api.mapbox.com/directions/v5/mapbox/driving/${longitude},${latitude};${lng},${lat}?access_token=pk.eyJ1Ijoib3Nrb3ZiYXNpdWsiLCJhIjoiY2s1NWVwcnhhMDhrazNmcGNvZjJ1MnA4OSJ9.56GsGp2cl6zpYh-Ns8ThxA&geometries=geojson`
+      )
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setGeoJSON({
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                geometry: data.routes[0].geometry
+              }
+            ]
+          });
+        });
     }
-  }, [geoJSON]);
+    return () => {
+      document.removeEventListener(
+        'click',
+        handlePopupClose
+      );
+    };
+  }, [selectedDeff, coords]);
 
   const loadMap = mapRaw => {
     if (mapRaw) {
@@ -149,7 +167,6 @@ const MapHolder = ({
       const { lng, lat } = newPoint;
       setMapCenter({ lng, lat });
     }
-
     // eslint-disable-next-line
   }, [newPoint]);
 
@@ -165,7 +182,7 @@ const MapHolder = ({
       event.preventDefault();
     }
   };
-     
+
   const linePaint = {
     'line-color': '#BF93E4',
     'line-width': 5
@@ -202,11 +219,22 @@ const MapHolder = ({
         {Object.keys(newPoint).length !== 0 && (
           <AddedPin coordinates={newPoint} />
         )}
+        {coords && (
+          <UserPin
+            coordinates={{
+              lng: 24.5170176,
+              lat: 48.611328
+            }}
+          />
+        )}
         <PopupHolder />
-        <GeoJSONLayer
-          data={geoJSON}
-          linePaint={linePaint}
-        />
+
+        {Object.keys(geoJSON).length !== 0 && (
+          <GeoJSONLayer
+            data={geoJSON}
+            linePaint={linePaint}
+          />
+        )}
       </Map>
     </div>
   );
@@ -237,17 +265,28 @@ MapHolder.propTypes = {
   visible: PropTypes.bool
 };
 
-export default connect(
-  state => ({
-    defsState: state.defs,
-    mapState: state.mapState,
-    newPoint: state.newPoint
-  }),
-  dispatch => ({
-    setMapCenter: map => dispatch(setMapCenter(map)),
-    setMapZoom: zoom => dispatch(setMapZoom(zoom)),
-    addNewPoint: newPoint =>
-      dispatch(addNewPoint(newPoint)),
-    hidePopup: () => dispatch(hidePopup())
-  })
-)(MapHolder);
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  watchPosition: false,
+  userDecisionTimeout: 5000
+})(
+  connect(
+    state => ({
+      defsState: state.defs,
+      mapState: state.mapState,
+      newPoint: state.newPoint,
+      selectedDeff: state.selectedDeff
+    }),
+    dispatch => ({
+      setMapCenter: map => dispatch(setMapCenter(map)),
+      setMapZoom: zoom => dispatch(setMapZoom(zoom)),
+      addNewPoint: newPoint =>
+        dispatch(addNewPoint(newPoint)),
+      selectDeff: selectedDeff =>
+        dispatch(selectDeff(selectedDeff)),
+      hidePopup: () => dispatch(hidePopup())
+    })
+  )(MapHolder)
+);

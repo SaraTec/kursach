@@ -66,7 +66,7 @@ const useStyles = makeStyles({
 });
 
 const Main = () => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   return (
     <>

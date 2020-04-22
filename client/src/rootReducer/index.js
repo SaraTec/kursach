@@ -5,6 +5,7 @@ import listReducer from '../modules/Sidebar/components/ItemList/reducers/listRed
 import filterReducer from '../modules/Sidebar/components/Search/components/Filter/reducers/filterReducer';
 import mapStateReducer from '../modules/MapHolder/reducers/mapStateReducer';
 import addNewPointReducer from '../modules/MapHolder/reducers/addNewPointReducer';
+import selectDeffReducer from '../modules/MapHolder/reducers/selectDeffReducer';
 import popupDisplayReducer from '../modules/MapHolder/reducers/popupDisplayReducer';
 import searchReducer from '../modules/Sidebar/components/Search/reducers';
 
@@ -13,6 +14,7 @@ export default combineReducers({
   filter: filterReducer,
   mapState: mapStateReducer,
   newPoint: addNewPointReducer,
+  selectedDeff: selectDeffReducer,
   defs: listReducer,
   popupData: popupDisplayReducer,
   search: searchReducer

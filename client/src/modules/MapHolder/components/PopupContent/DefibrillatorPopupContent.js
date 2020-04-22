@@ -1,10 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { Cancel } from '@material-ui/icons';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
+import IconButton from '@material-ui/core/IconButton';
 import { fetchSingleDefById } from '../../../Sidebar/api';
 import { hidePopup } from '../../actions/popupDisplay';
+import { selectDeff } from '../../actions/mapState';
 import Loader from '../../../../shared/Loader';
 import ModalPhoto from './PhotoGallery';
 import cancelToken from '../../../../shared/cancel-token';
@@ -13,6 +17,11 @@ import { titles } from './consts';
 const currDefCancelToken = cancelToken();
 
 const useStyle = makeStyles({
+  margin: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   popupContainer: {
     maxWidth: 400,
     maxHeight: 270,
@@ -56,7 +65,11 @@ const useStyle = makeStyles({
   }
 });
 
-const DefibrillatorPopupContent = ({ id, hidePopup }) => {
+const DefibrillatorPopupContent = ({
+  id,
+  hidePopup,
+  selectDeff
+}) => {
   const classes = useStyle();
   const [currDef, setCurrDef] = useState(null);
 
@@ -96,14 +109,27 @@ const DefibrillatorPopupContent = ({ id, hidePopup }) => {
 
   return currDef ? (
     <div className={classes.popupContainer}>
-      {currDef.images[0] && (
-        <img
-          title={currDef.images[0].filename}
-          className={classes.imagePreview}
-          src={`http://localhost:3012/api/images/${currDef.images[0].filename}`}
-          alt={currDef.images[0].filename}
-        />
-      )}
+      <div className={classes.margin}>
+        <IconButton
+          aria-label="Провести маршрут до даного дефебрилятора"
+          color="primary"
+          onClick={() => {
+            const [lng, lat] = currDef.location.coordinates;
+            selectDeff({ lng, lat });
+          }}
+        >
+          <MyLocationIcon fontSize="large" />
+        </IconButton>
+
+        {currDef.images[0] && (
+          <img
+            title={currDef.images[0].filename}
+            className={classes.imagePreview}
+            src={`http://localhost:3012/api/images/${currDef.images[0].filename}`}
+            alt={currDef.images[0].filename}
+          />
+        )}
+      </div>
       {Object.keys(titles).map(
         key =>
           currDef[key] && (
@@ -120,7 +146,9 @@ const DefibrillatorPopupContent = ({ id, hidePopup }) => {
         className={classes.closeBtn}
         onClick={hidePopup}
       />
-      <ModalPhoto images={currDef.images} />
+      <div className={classes.margin}>
+        <ModalPhoto images={currDef.images} />
+      </div>
     </div>
   ) : (
     <Loader />
@@ -133,5 +161,7 @@ DefibrillatorPopupContent.propTypes = {
 };
 
 export default connect(null, dispatch => ({
-  hidePopup: () => dispatch(hidePopup())
+  hidePopup: () => dispatch(hidePopup()),
+  selectDeff: selectedDeff =>
+    dispatch(selectDeff(selectedDeff))
 }))(DefibrillatorPopupContent);
