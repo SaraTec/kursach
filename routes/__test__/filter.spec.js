@@ -7,7 +7,7 @@ const User = require('../../models/User');
 
 const request = supertest(app);
 const databaseName = 'filterTest';
-const url = `mongodb://localhost:27017/${databaseName}`;
+const url = `mongodb+srv://Taras:20081999@boichuk-gt3rn.mongodb.net/${databaseName}`;
 
 const mockAdminEmail = 'admin@admin.com';
 const mockAdminPassword = 'qwe123Q!';

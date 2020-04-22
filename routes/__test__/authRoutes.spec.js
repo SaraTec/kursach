@@ -14,7 +14,7 @@ const mockAdminPasswordHashed = '$2a$10$9kWs/nlfM7ZIxJq0tj8yquATo47d0OqDl1pv.3tR
 
 let tokenForRegister, tokenForReset, tokenForAuth, tokenAdmin;
 
-const DBURL = `mongodb://localhost:27017/${mockDatabaseName}`;
+const DBURL = `mongodb+srv://Taras:20081999@boichuk-gt3rn.mongodb.net/${mockDatabaseName}`;
 
 const request = supertest(app);
 
