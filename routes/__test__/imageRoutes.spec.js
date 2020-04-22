@@ -93,7 +93,7 @@ describe('images routes', () => {
       )
       .expect((res) => {
         if (!Array.isArray(res.body.images))
-          throw new Error("images isn't array");
+          throw new Error('images isnt array');
       })
       .expect(201);
 
