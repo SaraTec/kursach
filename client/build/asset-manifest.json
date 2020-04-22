@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.807bac5c.chunk.css",
+    "main.js": "/static/js/main.e07b61a3.chunk.js",
+    "main.js.map": "/static/js/main.e07b61a3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a5f9fc38.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a5f9fc38.js.map",
+    "static/css/2.7efaf445.chunk.css": "/static/css/2.7efaf445.chunk.css",
+    "static/js/2.798983e0.chunk.js": "/static/js/2.798983e0.chunk.js",
+    "static/js/2.798983e0.chunk.js.map": "/static/js/2.798983e0.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7a8a991ed44078ca60cc7c408bec5f19.js": "/precache-manifest.7a8a991ed44078ca60cc7c408bec5f19.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.7efaf445.chunk.css.map": "/static/css/2.7efaf445.chunk.css.map",
+    "static/css/main.807bac5c.chunk.css.map": "/static/css/main.807bac5c.chunk.css.map",
+    "static/js/2.798983e0.chunk.js.LICENSE": "/static/js/2.798983e0.chunk.js.LICENSE",
+    "static/media/map-add-point.svg": "/static/media/map-add-point.2f6792f4.svg",
+    "static/media/map-marker-point.svg": "/static/media/map-marker-point.f03fa90e.svg",
+    "static/media/user.svg": "/static/media/user.8d0d9cf9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a5f9fc38.js",
+    "static/css/2.7efaf445.chunk.css",
+    "static/js/2.798983e0.chunk.js",
+    "static/css/main.807bac5c.chunk.css",
+    "static/js/main.e07b61a3.chunk.js"
+  ]
+}
