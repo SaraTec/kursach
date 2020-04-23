@@ -7,6 +7,7 @@ const EXPIRE_TIME_JWT_RESET = 60 * 60; //seconds
 const EMAIL_USER = 'defibrillator.lviv@gmail.com';
 const EMAIL_PASSWORD = 'Defibrillator1!';
 const EMAIL_FROM = 'defibrillator.lviv@gmail.com';
+//const BASE_URL = window.location.origin;
 const BASE_URL = 'http://localhost:3000';
 const ADMIN_EMAIL = 'admin@admin.com';
 const ADMIN_PASSWORD = 'qwe123Q!';

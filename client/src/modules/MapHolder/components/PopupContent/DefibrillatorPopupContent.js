@@ -125,7 +125,7 @@ const DefibrillatorPopupContent = ({
           <img
             title={currDef.images[0].filename}
             className={classes.imagePreview}
-            src={`http://localhost:3012/api/images/${currDef.images[0].filename}`}
+            src={`${window.location.origin}/api/images/${currDef.images[0].filename}`}
             alt={currDef.images[0].filename}
           />
         )}
