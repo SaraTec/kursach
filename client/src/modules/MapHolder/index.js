@@ -93,10 +93,14 @@ const MapHolder = ({
     // eslint-disable-next-line
   }, []);
 
-  /*  useEffect(()=>{
-    if(coords)
-    setMapCenter({ lng:coords.longitude, lat:coords.latitude })
-  },[coords]) */
+  useEffect(() => {
+    if (coords) {
+      setMapCenter({
+        lng: coords.longitude,
+        lat: coords.latitude
+      });
+    }
+  }, [coords]);
 
   useEffect(() => {
     if (coords && Object.keys(selectedDeff).length !== 0) {
@@ -142,10 +146,17 @@ const MapHolder = ({
   };
 
   const onZoomEnded = event => {
-    setMapCenter({
-      ...event.getCenter(),
-      zoom: event.getZoom()
-    });
+    if (
+      event
+        .getCenter()
+        .lng.toString()
+        .substring(0, 6) !== '24.031'
+    ) {
+      setMapCenter({
+        ...event.getCenter(),
+        zoom: event.getZoom()
+      });
+    }
   };
 
   const onZoomStarted = () => {
@@ -222,8 +233,8 @@ const MapHolder = ({
         {coords && (
           <UserPin
             coordinates={{
-              lng: 24.5170176,
-              lat: 48.611328
+              lng: coords.longitude,
+              lat: coords.latitude
             }}
           />
         )}
