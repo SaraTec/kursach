@@ -3,11 +3,11 @@ import {
   Switch,
   Route,
   Redirect,
-  withRouter
-  , useHistory
+  withRouter,
+  useHistory
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import Media from 'react-media';
 import './App.css';
 import { CSSTransition } from 'react-transition-group';
 import { makeStyles } from '@material-ui/core/styles';
@@ -66,15 +66,37 @@ const useStyles = makeStyles({
 });
 
 const Main = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   return (
     <>
-      <Sidebar setVisible={setVisible} visible={visible} />
-      <MapHolder
-        setVisible={setVisible}
-        visible={visible}
-      />
+      <Media query="(min-width: 599px)">
+        {matches =>
+          matches ? (
+            <Sidebar
+              setVisible={setVisible}
+              visible={visible}
+            />
+          ) : (
+            <></>
+          )
+        }
+      </Media>
+      <Media query="(min-width: 599px)">
+        {matches =>
+          matches ? (
+            <MapHolder
+              setVisible={setVisible}
+              visible={visible}
+            />
+          ) : (
+            <MapHolder
+              setVisible={setVisible}
+              visible={false}
+            />
+          )
+        }
+      </Media>
     </>
   );
 };
@@ -150,7 +172,7 @@ const App = ({
           <Redirect from="*" to="/" />
         </Switch>
       </div>
-      {(location.pathname === '/') && (
+      {location.pathname === '/' && (
         <CSSTransition
           in={isStartModalOpen}
           classNames={transitionClasses}

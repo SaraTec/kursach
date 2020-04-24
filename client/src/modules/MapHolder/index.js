@@ -6,10 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Button, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Media from 'react-media';
 import ReactMapboxGl, {
   GeoJSONLayer
 } from 'react-mapbox-gl';
 import PopupHolder from './components/PopupHolder';
+import SearchBar from './components/SearchBar';
 import {
   setMapCenter,
   setMapZoom,
@@ -54,6 +56,26 @@ const useStyles = makeStyles(() => ({
   })
 }));
 
+const useSearchBarStyle = makeStyles(() => ({
+  desktopStyle: {
+    position: 'fixed',
+    top: '10px',
+    right: '10px',
+    width: '100px',
+    zIndex:1,
+  },
+  mobileStyle: {
+    position: 'fixed',
+    width: '100px',
+    zIndex:1,
+    bottom: '10px',
+    right: 0,
+    left: 0,
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  }
+}));
+
 const Map = ReactMapboxGl({
   accessToken:
     'pk.eyJ1Ijoib3Nrb3ZiYXNpdWsiLCJhIjoiY2s1NWVwcnhhMDhrazNmcGNvZjJ1MnA4OSJ9.56GsGp2cl6zpYh-Ns8ThxA'
@@ -71,6 +93,7 @@ const MapHolder = ({
   coords
 }) => {
   const classes = useStyles({ visible });
+  const SearchBarStyle = useSearchBarStyle();
   const [map, setLocalMap] = useState(null);
   const [geoJSON, setGeoJSON] = useState({});
   const tooltipMessage = visible
@@ -200,19 +223,36 @@ const MapHolder = ({
   };
   return (
     <div className={classes.mapContainer}>
-      <Button
-        className={classes.showIcon}
-        color="primary"
-        onClick={hideSidebar}
-        size="small"
-      >
-        <Tooltip title={tooltipMessage}>
-          <ChevronRightIcon
-            className={classes.showMenuIcon}
-          />
-        </Tooltip>
-      </Button>
-
+      <Media query="(min-width: 599px)">
+        {matches =>
+          matches ? (
+            <Button
+              className={classes.showIcon}
+              color="primary"
+              onClick={hideSidebar}
+              size="small"
+            >
+              {' '}
+              <Tooltip title={tooltipMessage}>
+                <ChevronRightIcon
+                  className={classes.showMenuIcon}
+                />
+              </Tooltip>
+            </Button>
+          ) : (
+            <></>
+          )
+        }
+      </Media>
+      <Media query="(min-width: 599px)">
+        {matches =>
+          matches ? (
+            <SearchBar style={SearchBarStyle.desktopStyle} />
+          ) : (
+            <SearchBar style={SearchBarStyle.mobileStyle} />
+          )
+        }
+      </Media>
       <Map
         // eslint-disable-next-line react/style-prop-object
         style="mapbox://styles/oskovbasiuk/ck5nwya36638v1ilpmwxlfv5g"
