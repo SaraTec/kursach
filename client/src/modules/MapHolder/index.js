@@ -150,7 +150,7 @@ const MapHolder = ({
       event
         .getCenter()
         .lng.toString()
-        .substring(0, 6) !== '24.031'
+        .substring(0, 5) !== '24.03'
     ) {
       setMapCenter({
         ...event.getCenter(),
