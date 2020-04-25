@@ -57,8 +57,7 @@ const StartModal = ({ setStartModal }) => {
             className={classes.warningIcon}
             fontSize="large"
           />
-          Не несемо відповідальності за роботу
-          дефібриляторів.
+          Дипломна робота Учня ПЗ-42 Бойчука Тараса Віталійовича
         </p>
         <Button
           className={classes.acceptButton}

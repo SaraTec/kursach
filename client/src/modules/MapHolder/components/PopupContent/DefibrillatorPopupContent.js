@@ -23,8 +23,9 @@ const useStyle = makeStyles({
     alignItems: 'center'
   },
   popupContainer: {
+    backgroundColor:'#282c34',
+    zIndex: 100,
     maxWidth: 400,
-    maxHeight: 270,
     padding: '5px 15px',
     overflowY: 'auto',
     color: 'white',
@@ -68,7 +69,8 @@ const useStyle = makeStyles({
 const DefibrillatorPopupContent = ({
   id,
   hidePopup,
-  selectDeff
+  selectDeff,
+  height
 }) => {
   const classes = useStyle();
   const [currDef, setCurrDef] = useState(null);
@@ -108,7 +110,7 @@ const DefibrillatorPopupContent = ({
   }, [id]);
 
   return currDef ? (
-    <div className={classes.popupContainer}>
+    <div className={classes.popupContainer} style={{ maxHeight: height}}>
       <div className={classes.margin}>
         <IconButton
           aria-label="Провести маршрут до даного дефебрилятора"
