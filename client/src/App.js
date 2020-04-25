@@ -78,7 +78,10 @@ const Main = () => {
               visible={visible}
             />
           ) : (
-            <></>
+            <Sidebar
+              setVisible={setVisible}
+              visible={false}
+            />
           )
         }
       </Media>

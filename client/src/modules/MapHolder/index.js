@@ -60,19 +60,23 @@ const useSearchBarStyle = makeStyles(() => ({
   desktopStyle: {
     position: 'fixed',
     top: '10px',
-    right: '10px',
-    width: '100px',
-    zIndex:1,
+    right: '30px',
+    width: '150px',
+    zIndex: 1,
+    display: 'flex',
+    alignItems: 'center'
   },
   mobileStyle: {
     position: 'fixed',
-    width: '100px',
-    zIndex:1,
+    width: '150px',
+    zIndex: 1,
     bottom: '10px',
     right: 0,
     left: 0,
     marginRight: 'auto',
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
@@ -247,7 +251,9 @@ const MapHolder = ({
       <Media query="(min-width: 599px)">
         {matches =>
           matches ? (
-            <SearchBar style={SearchBarStyle.desktopStyle} />
+            <SearchBar
+              style={SearchBarStyle.desktopStyle}
+            />
           ) : (
             <SearchBar style={SearchBarStyle.mobileStyle} />
           )
@@ -280,7 +286,8 @@ const MapHolder = ({
         )}
         <PopupHolder />
 
-        {Object.keys(geoJSON).length !== 0 && (
+        {(Object.keys(geoJSON).length !== 0 &&
+          Object.keys(selectedDeff).length !== 0) && (
           <GeoJSONLayer
             data={geoJSON}
             linePaint={linePaint}
