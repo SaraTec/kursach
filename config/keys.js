@@ -4,11 +4,10 @@ const SECRET_JWT_KEY_SIGN_UP = 'signup_create_secret';
 const EXPIRE_TIME_JWT_SIGN_UP = 60 * 60; //seconds
 const SECRET_JWT_KEY_RESET = 'reset_create_secret';
 const EXPIRE_TIME_JWT_RESET = 60 * 60; //seconds
-const EMAIL_USER = 'defibrillator.lviv@gmail.com';
-const EMAIL_PASSWORD = 'Defibrillator1!';
-const EMAIL_FROM = 'defibrillator.lviv@gmail.com';
-//const BASE_URL = window.location.origin;
-const BASE_URL = 'http://localhost:3000';
+const EMAIL_USER = 'boichukdiploma@gmail.com';
+const EMAIL_PASSWORD = '20.08.1999';
+const EMAIL_FROM = 'boichukdiploma@gmail.com';
+const BASE_URL = 'https://doplom.herokuapp.com/';
 const ADMIN_EMAIL = 'admin@admin.com';
 const ADMIN_PASSWORD = 'qwe123Q!';
 
