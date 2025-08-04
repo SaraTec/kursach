@@ -155,9 +155,7 @@ describe('get method with an applied filter', () => {
 });
 
 afterAll(async (done) => {
-  await mongoose.connection
-    .collection('users')
-    .drop();
+  await mongoose.connection.collection('users').drop();
   await mongoose.connection
     .collection('defibrillators')
     .drop();

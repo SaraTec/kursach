@@ -3,8 +3,8 @@ const config = {
     url: 'mongodb://localhost:27017',
     databaseName: 'defibrillatorDB',
     options: {
-      useNewUrlParser: true, 
-      useUnifiedTopology: true, 
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   },
 

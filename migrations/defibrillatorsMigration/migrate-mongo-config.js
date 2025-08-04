@@ -3,12 +3,13 @@ const config = {
     url: 'mongodb://localhost:27017',
     databaseName: 'defibrillatorDB',
     options: {
-      useNewUrlParser: true, 
-      useUnifiedTopology: true, 
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   },
 
-  migrationsDir: './migrations/defibrillatorsMigration/migration',
+  migrationsDir:
+    './migrations/defibrillatorsMigration/migration',
 
   changelogCollectionName: 'changelog'
 };

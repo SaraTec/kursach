@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const defaultMongoURI = 'mongodb://localhost:27017/defibrillatorDB';
+const defaultMongoURI =
+  'mongodb://localhost:27017/defibrillatorDB';
 let gfs;
 
 const dbInit = (mongoURI = defaultMongoURI) => {
@@ -13,7 +14,10 @@ const dbInit = (mongoURI = defaultMongoURI) => {
 
   const conn = mongoose.connection;
 
-  conn.on('error', console.error.bind(console, 'connection error:'));
+  conn.on(
+    'error',
+    console.error.bind(console, 'connection error:')
+  );
   conn.once('open', () => {
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
       bucketName: 'images'

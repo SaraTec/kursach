@@ -12,7 +12,13 @@ const useStyles = makeStyles({
 const DeleteBtn = ({ handleOpen }) => {
   const classes = useStyles();
   return (
-    <Button variant="contained" color="primary" className={classes.pointCardDeleteButton} size="small" onClick={handleOpen}>
+    <Button
+      variant="contained"
+      color="primary"
+      className={classes.pointCardDeleteButton}
+      size="small"
+      onClick={handleOpen}
+    >
       Видалити
     </Button>
   );

@@ -13,7 +13,12 @@ const ButtonSignUpSendmail = ({ handleOpen }) => {
   const classes = useStyles();
 
   return (
-    <Button className={classes.button} variant="contained" color="primary" onClick={handleOpen}>
+    <Button
+      className={classes.button}
+      variant="contained"
+      color="primary"
+      onClick={handleOpen}
+    >
       Зареєструвати користувача
     </Button>
   );

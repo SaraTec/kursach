@@ -10,30 +10,29 @@ const deffValidationRules = () => {
   return [
     body('title')
       .notEmpty()
-      .withMessage('Поле обов\'язкове'),
+      .withMessage("Поле обов'язкове"),
     body('address')
       .notEmpty()
-      .withMessage('Поле обов\'язкове'),
+      .withMessage("Поле обов'язкове"),
     body('accessibility')
       .notEmpty()
-      .withMessage('Поле обов\'язкове'),
-    body('phone')
-      .custom((phones) => {
-        phones.map((value) => {
-          if (
-            !value.match(
-              /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s)\.]?[0-9]{2}[-\s)\.]?[0-9]{2}$/im
-            )
+      .withMessage("Поле обов'язкове"),
+    body('phone').custom((phones) => {
+      phones.map((value) => {
+        if (
+          !value.match(
+            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s)\.]?[0-9]{2}[-\s)\.]?[0-9]{2}$/im
           )
-            throw new Error(
-              'невірний формат телефонного номера'
-            );
-        });
-        return true;
-      }),
+        )
+          throw new Error(
+            'невірний формат телефонного номера'
+          );
+      });
+      return true;
+    }),
     body('informational_plates')
       .notEmpty()
-      .withMessage('Поле обов\'язкове')
+      .withMessage("Поле обов'язкове")
       .custom((value) => {
         if (
           !value.match(
@@ -50,7 +49,7 @@ const deffValidationRules = () => {
       }),
     body('storage_place')
       .notEmpty()
-      .withMessage('Поле обов\'язкове')
+      .withMessage("Поле обов'язкове")
       .custom((value) => {
         if (!value.match(/^Поверх ((1?[0-9])|20),.+$/))
           throw new Error('Формат розміщення некоректний');
@@ -58,7 +57,7 @@ const deffValidationRules = () => {
       }),
     body('actual_date')
       .notEmpty()
-      .withMessage('Поле обов\'язкове')
+      .withMessage("Поле обов'язкове")
       .custom((value) => {
         if (!value.match(/^\d{4}-\d{2}-\d{2}$/))
           throw new Error('Формат дати некоректний');
@@ -67,7 +66,7 @@ const deffValidationRules = () => {
       }),
     body('location')
       .notEmpty()
-      .withMessage('Поле обов\'язкове')
+      .withMessage("Поле обов'язкове")
       .custom((value) => {
         let errors = [];
         if (value.type != 'Point')

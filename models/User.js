@@ -33,15 +33,9 @@ const userSchema = new Schema({
 
   role: {
     type: String,
-    enum: [
-      ADMIN,
-      USER
-    ],
+    enum: [ADMIN, USER],
     required: true
   }
 });
 
-module.exports = mongoose.model(
-  'users', 
-  userSchema
-);
+module.exports = mongoose.model('users', userSchema);

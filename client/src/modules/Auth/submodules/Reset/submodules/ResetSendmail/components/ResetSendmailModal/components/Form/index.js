@@ -8,11 +8,11 @@ import { MyTextField } from '../../../../../../../../../../shared/Fields';
 const useStyles = makeStyles(theme => ({
   form: {
     width: '100%',
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(4, 0, 2),
-  },
+    margin: theme.spacing(4, 0, 2)
+  }
 }));
 
 const Form = ({ isSubmitting }) => {

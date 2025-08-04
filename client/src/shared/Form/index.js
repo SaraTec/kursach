@@ -131,7 +131,7 @@ const MyForm = ({
                 name="phone"
               />
               <MyImageField
-                variant="contained" 
+                variant="contained"
                 color="primary"
                 className={classes.input}
                 id="images"

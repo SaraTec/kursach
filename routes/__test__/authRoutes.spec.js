@@ -10,9 +10,13 @@ const mockPassword = '1234AAAaaa__';
 
 const mockAdminEmail = 'admin@admin.com';
 const mockAdminPassword = 'qwe123Q!';
-const mockAdminPasswordHashed = '$2a$10$9kWs/nlfM7ZIxJq0tj8yquATo47d0OqDl1pv.3tRfRU8fvcWrBK0W';
+const mockAdminPasswordHashed =
+  '$2a$10$9kWs/nlfM7ZIxJq0tj8yquATo47d0OqDl1pv.3tRfRU8fvcWrBK0W';
 
-let tokenForRegister, tokenForReset, tokenForAuth, tokenAdmin;
+let tokenForRegister,
+  tokenForReset,
+  tokenForAuth,
+  tokenAdmin;
 
 const DBURL = `mongodb://localhost:27017/${mockDatabaseName}`;
 
@@ -28,9 +32,11 @@ describe('auth routes', () => {
       useFindAndModify: false
     });
 
-    const admin = await User.findOne({ email: mockAdminEmail });
+    const admin = await User.findOne({
+      email: mockAdminEmail
+    });
 
-    if(!admin) {
+    if (!admin) {
       const newAdmin = new User({
         email: mockAdminEmail,
         password: mockAdminPasswordHashed,
@@ -42,7 +48,7 @@ describe('auth routes', () => {
     const res = await request
       .post('/api/auth/signin')
       .send({
-        email: mockAdminEmail, 
+        email: mockAdminEmail,
         password: mockAdminPassword
       });
 
@@ -52,7 +58,9 @@ describe('auth routes', () => {
   });
 
   it('should return status 200 when mail sent on sign up', async () => {
-    const user = await User.findOne({ email: mockEmailForRegister });
+    const user = await User.findOne({
+      email: mockEmailForRegister
+    });
     if (user) {
       await User.findByIdAndDelete(user._id);
     }
@@ -64,12 +72,15 @@ describe('auth routes', () => {
         email: mockEmailForRegister
       })
       .expect((res) => {
-        if(res.body.message !== 'Вітаємо!\n На цю електронну адресу надіслано лист\n з посиланням для створення пароля.')
-          throw new Error('message isn\'t correct');
+        if (
+          res.body.message !==
+          'Вітаємо!\n На цю електронну адресу надіслано лист\n з посиланням для створення пароля.'
+        )
+          throw new Error("message isn't correct");
 
-        if(res.body.token === undefined)
-          throw new Error('token isn\'t exist');
-        
+        if (res.body.token === undefined)
+          throw new Error("token isn't exist");
+
         tokenForRegister = res.body.token;
       })
       .expect(200);
@@ -106,16 +117,18 @@ describe('auth routes', () => {
       .expect(409);
   });
 
-  it('should return status 422 when token isn\'t correct', async () => {
+  it("should return status 422 when token isn't correct", async () => {
     const res = await request
       .post(`${BASEURL}/signup`)
       .send({
-        token: '$2a$10$i.0VgohTBtx8arWSKs4/AOY2IFgYbKLjHsDKs8raOHXnLz86HLcQKd',
+        token:
+          '$2a$10$i.0VgohTBtx8arWSKs4/AOY2IFgYbKLjHsDKs8raOHXnLz86HLcQKd',
         password: mockPassword,
         passwordConfirm: mockPassword
       })
       .expect({
-        message: 'Посилання для створення пароля не є дійсним.\n Зверніться до адміністратора, щоб отримати нове.'
+        message:
+          'Посилання для створення пароля не є дійсним.\n Зверніться до адміністратора, щоб отримати нове.'
       })
       .expect(422);
   });
@@ -130,7 +143,8 @@ describe('auth routes', () => {
       })
       .expect({
         errors: {
-          email: 'Ця електронна адреса вже комусь належить.\n Спробуйте іншу.'
+          email:
+            'Ця електронна адреса вже комусь належить.\n Спробуйте іншу.'
         }
       })
       .expect(409);
@@ -202,12 +216,15 @@ describe('auth routes', () => {
         email: mockEmailForRegister
       })
       .expect((res) => {
-        if(res.body.message !== 'Якщо електронна адреса коректна, на неї надіслано лист\n з посиланням для відновлення пароля.')
-          throw new Error('message isn\'t correct');
+        if (
+          res.body.message !==
+          'Якщо електронна адреса коректна, на неї надіслано лист\n з посиланням для відновлення пароля.'
+        )
+          throw new Error("message isn't correct");
 
-        if(res.body.token === undefined)
-          throw new Error('token isn\'t exist');
-        
+        if (res.body.token === undefined)
+          throw new Error("token isn't exist");
+
         tokenForReset = res.body.token;
       })
       .expect(200);
@@ -229,22 +246,26 @@ describe('auth routes', () => {
       .expect(201);
   });
 
-  it('should return status 422 when token isn\'t correct', async () => {
+  it("should return status 422 when token isn't correct", async () => {
     const res = await request
       .post(`${BASEURL}/reset`)
       .send({
-        token: '$2a$10$i.0VgohTBtx8arWSKs4/AOY2IFgYbKLjHsDKs8raOHXnLz86HLcQKd',
+        token:
+          '$2a$10$i.0VgohTBtx8arWSKs4/AOY2IFgYbKLjHsDKs8raOHXnLz86HLcQKd',
         password: mockPassword,
         passwordConfirm: mockPassword
       })
       .expect({
-        message: 'Посилання для відновлення пароля не є дійсним.'
+        message:
+          'Посилання для відновлення пароля не є дійсним.'
       })
       .expect(422);
   });
 
   it('should return status 404 when user not exist', async () => {
-    const user = await User.findOne({ email: mockEmailForRegister });
+    const user = await User.findOne({
+      email: mockEmailForRegister
+    });
     if (user) {
       await User.findByIdAndDelete(user._id);
     }
@@ -258,8 +279,7 @@ describe('auth routes', () => {
       })
       .expect({
         errors: {
-          email:
-            'Ця електронна адреса нікому не належить.'
+          email: 'Ця електронна адреса нікому не належить.'
         }
       })
       .expect(404);

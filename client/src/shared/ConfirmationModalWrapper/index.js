@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ModalWrapper from '../ModalWrapper';
 import Content from './Content';
@@ -28,7 +28,7 @@ const ConfirmationModalWrapper = ({
   );
 };
 
-ConfirmationModalWrapper.defaultProps ={
+ConfirmationModalWrapper.defaultProps = {
   confirmHandle: () => null,
   rejectHandle: () => null
 };

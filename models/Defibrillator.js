@@ -107,10 +107,12 @@ const defibrillatorSchema = new Schema({
   },
 
   images: {
-    type: [{
-      id: String,
-      filename: String
-    }],
+    type: [
+      {
+        id: String,
+        filename: String
+      }
+    ],
     required: false
   },
 

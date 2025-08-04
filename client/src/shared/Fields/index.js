@@ -150,7 +150,13 @@ MySelect.propTypes = {
   classes: PropTypes.string
 };
 
-const MyImageField = ({ label, id, name, setFieldValue, ...props }) => {
+const MyImageField = ({
+  label,
+  id,
+  name,
+  setFieldValue,
+  ...props
+}) => {
   const classes = useStyles();
 
   return (
@@ -168,10 +174,10 @@ const MyImageField = ({ label, id, name, setFieldValue, ...props }) => {
           setFieldValue('images', e.currentTarget.files);
         }}
       />
-      
+
       <InputLabel htmlFor={id}>
-        <Button {...props} component='span'>
-          { label }
+        <Button {...props} component="span">
+          {label}
         </Button>
       </InputLabel>
     </div>
@@ -185,4 +191,10 @@ MyImageField.propTypes = {
   setFieldValue: PropTypes.func.isRequired
 };
 
-export { MyTextField, MySelect, MyInputBase, MyImageField, UploadButton };
+export {
+  MyTextField,
+  MySelect,
+  MyInputBase,
+  MyImageField,
+  UploadButton
+};

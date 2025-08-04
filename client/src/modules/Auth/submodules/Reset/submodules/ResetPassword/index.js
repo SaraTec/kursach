@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   paperOuter: {
     backgroundColor: theme.palette.background.paper,
@@ -39,9 +39,15 @@ const ResetPassword = () => {
   const [error, setError] = useState('');
   const { email, token } = useParams();
 
-  const handleSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
+  const handleSubmit = async (
+    values,
+    { resetForm, setErrors, setSubmitting }
+  ) => {
     try {
-      const { data } = await resetUser({ ...values, token });
+      const { data } = await resetUser({
+        ...values,
+        token
+      });
       const { message } = data;
       resetForm();
       setSuccess(message);
@@ -72,7 +78,12 @@ const ResetPassword = () => {
               validationSchema={ResetSchema}
               onSubmit={handleSubmit}
             >
-              {({ isSubmitting }) => <Form email={email} isSubmitting={isSubmitting} />}
+              {({ isSubmitting }) => (
+                <Form
+                  email={email}
+                  isSubmitting={isSubmitting}
+                />
+              )}
             </Formik>
 
             <Footer success={success} error={error} />

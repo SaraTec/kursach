@@ -23,8 +23,13 @@ export const deleteItem = id => {
 };
 
 export const createImage = (params, defibrillatorId) => {
-  return http.postFormData(`${ URLimage}/${defibrillatorId}`, params);
+  return http.postFormData(
+    `${URLimage}/${defibrillatorId}`,
+    params
+  );
 };
 export const deleteImage = (imageId, defibrillatorId) => {
-  return http.delete(`${URLimage}/${defibrillatorId}/${imageId}`);
+  return http.delete(
+    `${URLimage}/${defibrillatorId}/${imageId}`
+  );
 };

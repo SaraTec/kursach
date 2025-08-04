@@ -6,9 +6,7 @@ import permissionService from '../../../Auth/permissionService';
 import SignUpSendmail from '../../../Auth/submodules/SignUp/submodules/SignUpSendmail';
 import ButtonSignOut from '../../../Auth/submodules/SignIn/components/ButtonSignOut';
 import ButtonBack from '../../../../shared/ButtonBack';
-import {
-  SIGNUP
-} from '../../../Auth/const';
+import { SIGNUP } from '../../../Auth/const';
 
 const useStyles = makeStyles({
   container: {
@@ -20,10 +18,16 @@ const useStyles = makeStyles({
 
 const Account = ({ user }) => {
   const classes = useStyles();
-  const [permissionForSignUp, changePermissionForSignUp] = useState(false);
+  const [
+    permissionForSignUp,
+    changePermissionForSignUp
+  ] = useState(false);
 
   useEffect(() => {
-    const permissionSignUp = permissionService(SIGNUP, user);
+    const permissionSignUp = permissionService(
+      SIGNUP,
+      user
+    );
     changePermissionForSignUp(permissionSignUp);
   }, [user]);
 
@@ -48,8 +52,6 @@ Account.propTypes = {
   })
 };
 
-export default connect(
-  state => ({
-    user: state.user.user
-  })
-)(Account);
+export default connect(state => ({
+  user: state.user.user
+}))(Account);

@@ -24,12 +24,21 @@ const Footer = ({ error }) => {
   return (
     <>
       <Grid container>
-        <Grid item xs className={classes.containerResetPassword}>
+        <Grid
+          item
+          xs
+          className={classes.containerResetPassword}
+        >
           <ResetSendmail />
         </Grid>
       </Grid>
-      <Typography className={classes.message} variant="body2" color="error" align="center">
-        { error }
+      <Typography
+        className={classes.message}
+        variant="body2"
+        color="error"
+        align="center"
+      >
+        {error}
       </Typography>
     </>
   );

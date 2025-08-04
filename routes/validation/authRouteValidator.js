@@ -8,11 +8,17 @@ const pwSchema = new passwordValidator();
 // Password has at least 1 uppercase, 1 lowercase,
 // 1 digit, 1 symbol and hasn't spaces
 pwSchema
-  .has().uppercase()
-  .has().lowercase()
-  .has().digits()
-  .has().symbols()
-  .has().not().spaces();
+  .has()
+  .uppercase()
+  .has()
+  .lowercase()
+  .has()
+  .digits()
+  .has()
+  .symbols()
+  .has()
+  .not()
+  .spaces();
 
 // Rules for registration router - create
 const emailValidationRules = () => {
@@ -20,9 +26,9 @@ const emailValidationRules = () => {
     // Email - required and structure email
     body('email')
       .notEmpty()
-      .withMessage('Поле обов\'язкове.')
+      .withMessage("Поле обов'язкове.")
       .isEmail()
-      .withMessage('Некоректно введена електронна адреса.'),
+      .withMessage('Некоректно введена електронна адреса.')
   ];
 };
 
@@ -32,19 +38,27 @@ const passwordValidationRules = () => {
     // Password - required, length 8 - 64 symbols and password validation
     body('password')
       .notEmpty()
-      .withMessage('Поле обов\'язкове.')
+      .withMessage("Поле обов'язкове.")
       .isLength({ min: 8, max: 64 })
-      .withMessage('Довжина пароля повинна бути від 8 до 64 символів.')
-      .custom(value => pwSchema.validate(value))
-      .withMessage('Пароль повинен містити щонайменше одну малу літеру, ' +
-        'велику літеру, цифру, символ і не мати пробілів.'),
+      .withMessage(
+        'Довжина пароля повинна бути від 8 до 64 символів.'
+      )
+      .custom((value) => pwSchema.validate(value))
+      .withMessage(
+        'Пароль повинен містити щонайменше одну малу літеру, ' +
+          'велику літеру, цифру, символ і не мати пробілів.'
+      ),
 
     // Confirmation password - required and equel password
     body('passwordConfirm')
       .notEmpty()
-      .withMessage('Поле обов\'язкове.')
-      .custom((value, { req }) => value === req.body.password)
-      .withMessage('Некоректно введене підтвердження пароля.')
+      .withMessage("Поле обов'язкове.")
+      .custom(
+        (value, { req }) => value === req.body.password
+      )
+      .withMessage(
+        'Некоректно введене підтвердження пароля.'
+      )
   ];
 };
 

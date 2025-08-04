@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { Button, makeStyles } from '@material-ui/core';
 import { socketAuthClose } from '../../../../../shared/websocket';
 import { signOut } from '../../../actions/user';
-import { fetchDefs, clearData } from '../../../../Sidebar/components/ItemList/actions/list';
+import {
+  fetchDefs,
+  clearData
+} from '../../../../Sidebar/components/ItemList/actions/list';
 import ConfirmationModalWrapper from '../../../../../shared/ConfirmationModalWrapper';
 
 const useStyles = makeStyles({
@@ -18,7 +21,12 @@ const CustomButton = ({ handleOpen }) => {
   const classes = useStyles();
 
   return (
-    <Button className={classes.button} variant="contained" color="primary" onClick={handleOpen}>
+    <Button
+      className={classes.button}
+      variant="contained"
+      color="primary"
+      onClick={handleOpen}
+    >
       Вийти з особистого кабінету
     </Button>
   );
@@ -28,7 +36,11 @@ CustomButton.propTypes = {
   handleOpen: PropTypes.func.isRequired
 };
 
-const ButtonSignOut = ({ signOutSubmit, fetchDefItems, clearDefItems }) => {
+const ButtonSignOut = ({
+  signOutSubmit,
+  fetchDefItems,
+  clearDefItems
+}) => {
   const handleSignOut = () => {
     signOutSubmit();
     socketAuthClose();
@@ -52,11 +64,8 @@ ButtonSignOut.propTypes = {
   clearDefItems: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    signOutSubmit: () => dispatch(signOut()),
-    fetchDefItems: () => dispatch(fetchDefs()),
-    clearDefItems: () => dispatch(clearData()),
-  })
-)(ButtonSignOut);
+export default connect(null, dispatch => ({
+  signOutSubmit: () => dispatch(signOut()),
+  fetchDefItems: () => dispatch(fetchDefs()),
+  clearDefItems: () => dispatch(clearData())
+}))(ButtonSignOut);

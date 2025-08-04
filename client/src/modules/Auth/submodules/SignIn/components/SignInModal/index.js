@@ -12,7 +12,10 @@ import {
   successSignIn,
   failSignIn
 } from '../../../../actions/user';
-import { fetchDefs, clearData } from '../../../../../Sidebar/components/ItemList/actions/list';
+import {
+  fetchDefs,
+  clearData
+} from '../../../../../Sidebar/components/ItemList/actions/list';
 import { INITIAL_VALUES } from './const';
 import AuthSchema from './validator';
 import Header from './components/Header';
@@ -105,5 +108,5 @@ export default connect(null, dispatch => ({
     dispatch(successSignIn(user, authorization)),
   fail: () => dispatch(failSignIn()),
   fetchDefItems: () => dispatch(fetchDefs()),
-  clearDefItems: () => dispatch(clearData()),
+  clearDefItems: () => dispatch(clearData())
 }))(SignInModal);

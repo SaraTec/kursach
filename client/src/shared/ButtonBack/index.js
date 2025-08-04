@@ -16,7 +16,7 @@ const ButtonBack = () => {
     history.push('/');
   };
 
-  return(
+  return (
     <Button
       type="button"
       fullWidth

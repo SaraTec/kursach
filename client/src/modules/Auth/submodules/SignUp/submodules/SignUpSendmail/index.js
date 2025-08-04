@@ -4,7 +4,10 @@ import SignUpSendmailModal from './components/SignUpSendmailModal';
 import ButtonSignUpSendmail from './components/ButtonSignUpSendmail';
 
 const SignUpSendmail = () => (
-  <ModalWrapper ButtonOpen={ButtonSignUpSendmail} ModalContent={SignUpSendmailModal} />
+  <ModalWrapper
+    ButtonOpen={ButtonSignUpSendmail}
+    ModalContent={SignUpSendmailModal}
+  />
 );
 
 export default SignUpSendmail;

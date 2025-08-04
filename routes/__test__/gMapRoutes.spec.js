@@ -8,7 +8,9 @@ describe('Routes for working with Google map', () => {
       '/api/gmap/options/Nadvi'
     );
     expect(response.status).toBe(200);
-    expect(response.body.predictions.length >= 0).toBe(true);
+    expect(response.body.predictions.length >= 0).toBe(
+      true
+    );
   });
   it('get details by placeid', async () => {
     const response = await request.get(

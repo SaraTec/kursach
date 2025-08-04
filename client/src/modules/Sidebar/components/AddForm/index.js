@@ -13,7 +13,7 @@ const AddForm = () => {
         type: 'Point',
         coordinates: data.coordinates
       },
-      storage_place: `Поверх ${data.floor}, ${data.storage_place}`,
+      storage_place: `Поверх ${data.floor}, ${data.storage_place}`
     };
 
     const bodyFormData = new FormData();

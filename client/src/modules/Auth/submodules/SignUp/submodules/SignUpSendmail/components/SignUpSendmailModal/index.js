@@ -19,15 +19,18 @@ const useStyles = makeStyles(() => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 }));
 
 const SignUpSendmailModal = () => {
   const classes = useStyles();
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
+  const handleSubmit = async (
+    values,
+    { resetForm, setErrors, setSubmitting }
+  ) => {
     try {
       const { data } = await signUpSendmail(values);
       const { message } = data;
@@ -48,7 +51,11 @@ const SignUpSendmailModal = () => {
   }, []);
 
   return (
-    <Container className={classes.container} component="main" maxWidth="xs">
+    <Container
+      className={classes.container}
+      component="main"
+      maxWidth="xs"
+    >
       <div className={classes.paper}>
         <Header />
 
@@ -57,7 +64,9 @@ const SignUpSendmailModal = () => {
           validationSchema={SignUpSendmailSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => <Form isSubmitting={isSubmitting} />}
+          {({ isSubmitting }) => (
+            <Form isSubmitting={isSubmitting} />
+          )}
         </Formik>
 
         <Footer success={success} />

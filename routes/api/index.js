@@ -29,7 +29,7 @@ const getReverseGeocoding = (lng, lat) => {
     params: {
       latlng: `${lat},${lng}`,
       key,
-      language:'uk'
+      language: 'uk'
     }
   });
 };

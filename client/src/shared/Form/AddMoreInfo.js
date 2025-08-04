@@ -13,7 +13,7 @@ const AddMoreInfo = ({ className, formik }) => {
         className={className}
         variant="filled"
         value={formik.values.additional_information}
-        onChange={(e) => {
+        onChange={e => {
           formik.setFieldValue(
             'additional_information',
             e.target.value

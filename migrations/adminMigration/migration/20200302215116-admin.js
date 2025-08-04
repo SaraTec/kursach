@@ -7,7 +7,9 @@ const {
 } = require('../../../config/keys');
 
 // Admin role
-const { ADMIN } = require('../../../consts/user_role_state');
+const {
+  ADMIN
+} = require('../../../consts/user_role_state');
 
 module.exports = {
   async up(db) {
@@ -23,7 +25,6 @@ module.exports = {
       };
 
       await db.collection('users').insertOne(admin);
-
     } catch (e) {
       console.log(e.message);
     }
@@ -31,8 +32,9 @@ module.exports = {
 
   async down(db) {
     try {
-      await db.collection('users').deleteMany({role: ADMIN});
-      
+      await db
+        .collection('users')
+        .deleteMany({ role: ADMIN });
     } catch (e) {
       console.log(e.message);
     }

@@ -3,8 +3,8 @@ import {
   Switch,
   Route,
   Redirect,
-  withRouter
-  , useHistory
+  withRouter,
+  useHistory
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -150,7 +150,7 @@ const App = ({
           <Redirect from="*" to="/" />
         </Switch>
       </div>
-      {(location.pathname === '/') && (
+      {location.pathname === '/' && (
         <CSSTransition
           in={isStartModalOpen}
           classNames={transitionClasses}

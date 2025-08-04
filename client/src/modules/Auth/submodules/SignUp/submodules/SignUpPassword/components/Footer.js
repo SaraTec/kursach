@@ -13,7 +13,12 @@ const Footer = ({ success, error }) => {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.message} variant="body2" color={error ? 'error' : 'primary'} align="center">
+    <Typography
+      className={classes.message}
+      variant="body2"
+      color={error ? 'error' : 'primary'}
+      align="center"
+    >
       {error || success}
     </Typography>
   );

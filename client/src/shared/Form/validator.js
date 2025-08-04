@@ -1,8 +1,8 @@
 ﻿import * as Yup from 'yup';
 
 const FormValidation = Yup.object().shape({
-  address: Yup.string().required('Поле обов\'язкове'),
-  title: Yup.string().required('Поле обов\'язкове'),
+  address: Yup.string().required("Поле обов'язкове"),
+  title: Yup.string().required("Поле обов'язкове"),
   phone: Yup.array().of(
     Yup.string()
       .required('Формат номеру неправильний')
@@ -12,11 +12,11 @@ const FormValidation = Yup.object().shape({
         'Формат номеру неправильний'
       )
   ),
-  accessibility: Yup.string().required('Поле обов\'язкове'),
-  storage_place: Yup.string().required('Поле обов\'язкове'),
+  accessibility: Yup.string().required("Поле обов'язкове"),
+  storage_place: Yup.string().required("Поле обов'язкове"),
   floor: Yup.number()
-    .required('Поле обов\'язкове')
-    .min(0, 'Значення поля не може бути від\'ємне')
+    .required("Поле обов'язкове")
+    .min(0, "Значення поля не може бути від'ємне")
     .max(20, 'Значення поля не може бути вище 20')
 });
 

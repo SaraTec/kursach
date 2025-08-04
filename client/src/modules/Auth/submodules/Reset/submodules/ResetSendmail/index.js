@@ -4,7 +4,10 @@ import ResetSendmailModal from './components/ResetSendmailModal';
 import ButtonResetSendmail from './components/ButtonResetSendmail';
 
 const ResetSendmail = () => (
-  <ModalWrapper ButtonOpen={ButtonResetSendmail} ModalContent={ResetSendmailModal} />
+  <ModalWrapper
+    ButtonOpen={ButtonResetSendmail}
+    ModalContent={ResetSendmailModal}
+  />
 );
 
 export default ResetSendmail;

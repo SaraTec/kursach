@@ -10,7 +10,10 @@ const validate = (req, res, next) => {
 
   // Create array of formatted errors
   const extractedErrors = {};
-  errors.array().forEach(err => { if(!extractedErrors[err.param]) extractedErrors[err.param] = err.msg; });
+  errors.array().forEach((err) => {
+    if (!extractedErrors[err.param])
+      extractedErrors[err.param] = err.msg;
+  });
 
   // Response [Unprocessable Entity] - array of errors and first error message
   return res.status(422).json({

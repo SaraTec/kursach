@@ -2,14 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, permission, ...rest }) => (
+const PrivateRoute = ({
+  component: Component,
+  permission,
+  ...rest
+}) => (
   <Route
     {...rest}
-    render={(props) => (
-      (permission === true)
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: '/' }} />
-    )}
+    render={props =>
+      permission === true ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: '/' }} />
+      )
+    }
   />
 );
 

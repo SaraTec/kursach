@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputAdornment, IconButton } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import {
+  InputAdornment,
+  IconButton
+} from '@material-ui/core';
+import {
+  Visibility,
+  VisibilityOff
+} from '@material-ui/icons';
 
-const InputAdornmentPassword = ({ showPassword, handleClickShowPassword, handleMouseDownPassword }) => (
+const InputAdornmentPassword = ({
+  showPassword,
+  handleClickShowPassword,
+  handleMouseDownPassword
+}) => (
   <InputAdornment position="end">
     <IconButton
       onClick={handleClickShowPassword}
