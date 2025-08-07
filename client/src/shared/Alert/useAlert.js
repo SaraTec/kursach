@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react';
+  import { useState, useEffect } from 'react';
 
-let globalState = {
-  open: false,
-  severity: 'info',
-  message: ''
-};
-
-const listeners = [];
-
-const useAlert = () => {
-  const [, setState] = useState(globalState);
-
-  const dispatch = newState => {
-    globalState = { ...globalState, ...newState };
-
-    listeners.forEach(listener => listener(globalState));
+  let globalState = {
+    open: false,
+    severity: 'info',
+    message: ''
   };
 
-  useEffect(() => {
-    listeners.push(setState);
+  const listeners = [];
 
-    return () => {
-      listeners.splice(listeners.length - 1, 1);
+  const useAlert = () => {
+    const [, setState] = useState(globalState);
+
+    const dispatch = newState => {
+      globalState = { ...globalState, ...newState };
+
+      listeners.forEach(listener => listener(globalState));
     };
-  }, [setState]);
 
-  return [globalState, dispatch];
-};
+    useEffect(() => {
+      listeners.push(setState);
 
-export default useAlert;
+      return () => {
+        listeners.splice(listeners.length - 1, 1);
+      };
+    }, [setState]);
+
+    return [globalState, dispatch];
+  };
+
+  export default useAlert;
